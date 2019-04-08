@@ -1,10 +1,21 @@
+/**
+ * Dependencies
+ */
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { withRouter } from "react-router-dom";
 
+/**
+ * Helpers
+ */
 import { getJwt, removeJwt } from "../Helpers/jwt.helpers";
 import { setAuthToken } from "../Helpers/headers.helpers";
+
+/**
+ * Context
+ */
+import UserContext from "../Contexts/User.context";
 
 function Authenticated(props) {
   const [user, setUser] = useState(null);
@@ -68,7 +79,13 @@ function Authenticated(props) {
     return <>Loading</>;
   }
 
-  return <>{props.children}</>;
+  return (
+    <>
+      <UserContext.Provider value={{ user }}>
+        {props.children}
+      </UserContext.Provider>
+    </>
+  );
 }
 
 export default withRouter(Authenticated);

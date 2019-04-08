@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+
+/**
+ * Contexts
+ */
+import UserContext from "../Contexts/User.context";
 
 function Homepage() {
-  return <>Hellooo</>;
+  const { user } = useContext(UserContext);
+  console.log(user);
+  return <>{user.id}</>;
 }
 
 export default Homepage;
